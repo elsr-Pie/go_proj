@@ -1,9 +1,12 @@
 # Stage 1: Build the Go application using the official Golang image
-FROM golang:1.19 as builder
+FROM golang:1.23 as builder
 
 WORKDIR /app
 
 # Copy go.mod and go.sum and download dependencies
+COPY go.mod go.sum ./
+RUN go mod download
+
 COPY go.mod go.sum ./
 RUN go mod download
 
